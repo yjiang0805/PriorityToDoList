@@ -17,18 +17,15 @@ def clear_form():
 def write_data():
     tasks = get_tasks()
     for task in tasks:
-        st.write("Assignment Name: " + str(task["assignmentName"]))
-        st.write("Due Date: " + str(task["dueDate"]))
-        st.write("Due Time: " + str(task["dueTime"]))
-        st.write("Assignment Weight: " + str(task["assignmentWeight"]))
+        st.write("Assignment: " + str(task["assignmentName"]))
+        st.write("Due Date: " + str(task["dueDate"]) + " at " + str(task["dueTime"]))
+        #st.write("Due Time: " + str(task["dueTime"]))
+        #st.write("Assignment Weight: " + str(task["assignmentWeight"]))
         st.write("priority value: " + str(task["priorityValue"]))
-        st.write("id: " + str(task["id"]) )
+        #st.write("id: " + str(task["id"]) )
         st.button("Completed",key=task["id"], on_click=on_button_click, kwargs={"button": task["id"]})
 
 def main():
-    print("refresh")
-    
-
     st.title("Priority To-Do List")
     menu = ["Create","Classes"]
 
@@ -42,7 +39,6 @@ def main():
             with st.form(key = "createTask", clear_on_submit=True):
                 
                 assignmentName = st.text_input("Assignment Name")   
-                print(assignmentName)
                 dueDate = st.date_input("Due Date") 
                 dueTime = st.time_input("Due Time", value = datetime.time(23,59))
                 points = st.number_input("Points")
@@ -74,7 +70,7 @@ def main():
                 col2 = st.empty()
                 write_data()
             st.session_state["last_clicked"]=""
-        st.write(st.session_state)
+        #st.write(st.session_state)
         
 
 
